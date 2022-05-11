@@ -11,7 +11,7 @@ namespace IntrenalSystem.UserManagement.Model.APIResponseModels
     {
         public T? Result { get; set; }
         private bool Status { get { return !HasError; } }
-        public bool HasError { private get; set; }
+        public bool HasError { get; set; }
         public string? Message { get; set; }
         public HttpStatusCode StatusCode { get; set; }
 
