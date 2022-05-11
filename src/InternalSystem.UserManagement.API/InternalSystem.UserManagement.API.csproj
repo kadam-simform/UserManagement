@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0-preview.3.22175.1">
       <PrivateAssets>all</PrivateAssets>
@@ -22,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InternalSystem.UserManagement.Database\InternalSystem.UserManagement.Database.csproj" />
+    <ProjectReference Include="..\InternalSystem.UserManagement.Service\InternalSystem.UserManagement.Service.csproj" />
     <ProjectReference Include="..\IntrenalSystem.UserManagement.Model\IntrenalSystem.UserManagement.Model.csproj" />
   </ItemGroup>
 

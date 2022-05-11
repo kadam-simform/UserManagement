@@ -1,4 +1,5 @@
-﻿using IntrenalSystem.UserManagement.Model.APIResponseModels;
+﻿using InternalSystem.UserManagement.Service.Attributes;
+using IntrenalSystem.UserManagement.Model.APIResponseModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Net;
@@ -8,45 +9,6 @@ namespace InternalSystem.UserManagement.API.Helpers
 {
     public static class Utility
     {
-        //public static void RegisterServices(this IServiceCollection services)
-        //{
-        //    // Get class library
-        //    var serviceLibraries = Assembly.Load("PuzzleBreaks.Services")
-        //        .GetTypes()
-        //        .Where(x => x.IsClass && x.GetInterfaces().Any(i => i.Name.Contains("Service")) && x.Namespace.Contains(".Services.Services") && !string.IsNullOrEmpty(x.Name) && x.Name.Contains("Service"))
-        //        .ToList();
-
-        //    if (serviceLibraries != null && serviceLibraries.Count > 0)
-        //    {
-        //        foreach (var service in serviceLibraries)
-        //        {
-        //            var interfaceType = service.GetInterfaces().FirstOrDefault();
-        //            Service.Attributes.ServiceLifetimeAttribute attribute = service.GetCustomAttribute<Services.Attributes.ServiceLifetimeAttribute>();
-        //            ServiceLifetime lifetime = attribute == null ? ServiceLifetime.Scoped : attribute.LifeTime;
-
-
-        //            services.Add(new ServiceDescriptor(interfaceType, service, lifetime));
-        //        }
-        //    }
-        //}
-
-        public static void RegisterRepository(this IServiceCollection services)
-        {
-            // Get class library
-            var repositoryLibraries = Assembly.Load("PuzzleBreaks.Repository")
-                .GetTypes()
-                .Where(x => x.IsClass && x.GetInterfaces().Any() && x.Namespace.Contains(".Repository.Repository"))
-                .ToList();
-
-            if (repositoryLibraries != null && repositoryLibraries.Count > 0)
-            {
-                foreach (var repository in repositoryLibraries)
-                {
-                    var interfaceType = repository.GetInterfaces().FirstOrDefault();
-                    services.AddScoped(interfaceType, repository);
-                }
-            }
-        }
         public static string GetErrors(this ModelStateDictionary modelState)
         {
             string messages = string.Join(" ", modelState.Values
@@ -71,6 +33,31 @@ namespace InternalSystem.UserManagement.API.Helpers
                 default:
                     return controller.StatusCode((int)response.StatusCode, response);
             }
+        }
+        public static string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            using (var rng = System.Security.Cryptography.RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomNumber);
+                string refreshToken = Convert.ToBase64String(randomNumber);
+                return refreshToken.ReplaceUrlCharacters();
+            }
+        } 
+        public static string ReplaceUrlCharacters(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+                return str;
+
+            return str.Replace(new char[] { '&', '%', '?', '/', '=', '+' }, "$");
+        }
+
+        public static string Replace(this string s, char[] separators, string newVal)
+        {
+            string[] temp;
+
+            temp = s.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            return String.Join(newVal, temp);
         }
 
     }

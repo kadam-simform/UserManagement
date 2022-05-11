@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IntrenalSystem.UserManagement.Model.APIRequestModels
 {
-    public  class AuthenticationRequestBody
+    public  class AuthenticationRequest
     {
         [Required]
         public string? UserName { get; set; }

@@ -18,3 +18,4 @@ namespace IntrenalSystem.UserManagement.Model.APIResponseModels
         public Dictionary<string, object> ExtraData { get; } = new Dictionary<string, object>();
     }
 }
+
