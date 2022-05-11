@@ -1,9 +1,12 @@
-﻿using IntrenalSystem.UserManagement.Model.APIResponseModels;
+﻿using IntrenalSystem.UserManagement.Model.APIRequestModels;
+using IntrenalSystem.UserManagement.Model.APIResponseModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace InternalSystem.UserManagement.Services.IServices
 {
     public interface IAuthenticationService
     {
-        Task<JsonResponseModel<string>> ValidateUserCredentials(string userName, string password);
+        Task<SignInResult> ValidateUserCredentials(string userName, string password);
+        Task<string> GenerateToken(UserRequest user);
     }
 }

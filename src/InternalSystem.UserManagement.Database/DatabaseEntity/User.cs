@@ -9,8 +9,8 @@ namespace InternalSystem.UserManagement.Database.DatabaseEntity
 {
     public class User : IdentityUser<int>
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
         public string? ProfiileImage{ get; set; }
         public DateTime InsertDate { get; set; }
         public DateTime? UpdateDate { get; set; }
