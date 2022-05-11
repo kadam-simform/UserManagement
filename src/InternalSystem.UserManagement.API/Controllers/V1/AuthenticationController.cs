@@ -14,7 +14,7 @@ namespace InternalSystem.UserManagement.API.Controllers.V1
 {
     [Route("v{version:apiVersion}/api/authentication")]
     [ApiController]
-    [ApiVersion("1.0")]
+    [ApiVersion("1")]
     public class AuthenticationController : ControllerBase
     {
         private readonly IAuthenticationService _authenticationService;

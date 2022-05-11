@@ -6,6 +6,7 @@ using InternalSystem.UserManagement.Database.DatabaseEntity;
 using InternalSystem.UserManagement.Service.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -50,17 +51,14 @@ builder.Services.AddAuthentication(opt =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddApiVersioning(1);
+builder.Services.Configure<ApiBehaviorOptions>(opt =>
+{
+    opt.SuppressModelStateInvalidFilter = true;
+});
 builder.Services.AddSwaggerGen(swaggerOptions =>
 {
     swaggerOptions.CustomSchemaIds(x => x.FullName);
     swaggerOptions.SwaggerDoc("v1", new OpenApiInfo { Title = "User Management", Version = "v1" });
-});
-
-//added support for API versioning
-builder.Services.AddApiVersioning(options => {
-    options.AssumeDefaultVersionWhenUnspecified = true;
-    options.ReportApiVersions = true;
-    options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
 });
 RegisterAutoMapper(builder.Services);
 var app = builder.Build();
