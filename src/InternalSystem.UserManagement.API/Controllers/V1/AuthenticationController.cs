@@ -12,7 +12,7 @@ using System.Net;
 
 namespace InternalSystem.UserManagement.API.Controllers.V1
 {
-    [Route("v{version:apiVersion}/api/authentication")]
+    [Route("/usermanagement/v{version:apiVersion}/authentication")]
     [ApiController]
     [ApiVersion("1")]
     public class AuthenticationController : ControllerBase
